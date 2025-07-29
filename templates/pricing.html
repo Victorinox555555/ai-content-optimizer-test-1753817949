@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing - Test-stripe_charge</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+            <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+                Choose Your Plan
+            </h2>
+            <p class="mt-4 text-xl text-gray-600">
+                Start free, upgrade when you need more features
+            </p>
+        </div>
+        
+        <div class="mt-12 space-y-4 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 lg:max-w-4xl lg:mx-auto xl:max-w-none xl:mx-0 xl:grid-cols-3">
+            <!-- Free Plan -->
+            <div class="border border-gray-200 rounded-lg shadow-sm divide-y divide-gray-200">
+                <div class="p-6">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">Free</h3>
+                    <p class="mt-4 text-sm text-gray-500">Perfect for getting started</p>
+                    <p class="mt-8">
+                        <span class="text-4xl font-extrabold text-gray-900">$0</span>
+                        <span class="text-base font-medium text-gray-500">/month</span>
+                    </p>
+                    <button class="mt-8 block w-full bg-gray-800 border border-gray-800 rounded-md py-2 text-sm font-semibold text-white text-center hover:bg-gray-900">
+                        Current Plan
+                    </button>
+                </div>
+                <div class="pt-6 pb-8 px-6">
+                    <h4 class="text-xs font-medium text-gray-900 tracking-wide uppercase">What's included</h4>
+                    <ul class="mt-6 space-y-4">
+                        <li class="flex space-x-3">
+                            <span class="text-green-500">✓</span>
+                            <span class="text-sm text-gray-500">Basic features</span>
+                        </li>
+                        <li class="flex space-x-3">
+                            <span class="text-green-500">✓</span>
+                            <span class="text-sm text-gray-500">Community support</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Basic Plan -->
+            <div class="border border-gray-200 rounded-lg shadow-sm divide-y divide-gray-200">
+                <div class="p-6">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">Basic</h3>
+                    <p class="mt-4 text-sm text-gray-500">For growing businesses</p>
+                    <p class="mt-8">
+                        <span class="text-4xl font-extrabold text-gray-900">$9</span>
+                        <span class="text-base font-medium text-gray-500">/month</span>
+                    </p>
+                    <button onclick="subscribeToPlan('basic')" class="mt-8 block w-full bg-indigo-600 border border-transparent rounded-md py-2 text-sm font-semibold text-white text-center hover:bg-indigo-700">
+                        Upgrade to Basic
+                    </button>
+                </div>
+                <div class="pt-6 pb-8 px-6">
+                    <h4 class="text-xs font-medium text-gray-900 tracking-wide uppercase">What's included</h4>
+                    <ul class="mt-6 space-y-4">
+                        <li class="flex space-x-3">
+                            <span class="text-green-500">✓</span>
+                            <span class="text-sm text-gray-500">All free features</span>
+                        </li>
+                        <li class="flex space-x-3">
+                            <span class="text-green-500">✓</span>
+                            <span class="text-sm text-gray-500">Advanced analytics</span>
+                        </li>
+                        <li class="flex space-x-3">
+                            <span class="text-green-500">✓</span>
+                            <span class="text-sm text-gray-500">Email support</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Premium Plan -->
+            <div class="border border-indigo-200 rounded-lg shadow-sm divide-y divide-gray-200 border-2">
+                <div class="p-6">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">Premium</h3>
+                    <p class="mt-4 text-sm text-gray-500">For power users</p>
+                    <p class="mt-8">
+                        <span class="text-4xl font-extrabold text-gray-900">$29</span>
+                        <span class="text-base font-medium text-gray-500">/month</span>
+                    </p>
+                    <button onclick="subscribeToPlan('premium')" class="mt-8 block w-full bg-indigo-600 border border-transparent rounded-md py-2 text-sm font-semibold text-white text-center hover:bg-indigo-700">
+                        Upgrade to Premium
+                    </button>
+                </div>
+                <div class="pt-6 pb-8 px-6">
+                    <h4 class="text-xs font-medium text-gray-900 tracking-wide uppercase">What's included</h4>
+                    <ul class="mt-6 space-y-4">
+                        <li class="flex space-x-3">
+                            <span class="text-green-500">✓</span>
+                            <span class="text-sm text-gray-500">All basic features</span>
+                        </li>
+                        <li class="flex space-x-3">
+                            <span class="text-green-500">✓</span>
+                            <span class="text-sm text-gray-500">Priority support</span>
+                        </li>
+                        <li class="flex space-x-3">
+                            <span class="text-green-500">✓</span>
+                            <span class="text-sm text-gray-500">API access</span>
+                        </li>
+                        <li class="flex space-x-3">
+                            <span class="text-green-500">✓</span>
+                            <span class="text-sm text-gray-500">Custom integrations</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const stripe = Stripe('pk_test_...');
+        
+        async function subscribeToPlan(planType) {
+            try {
+                const baseUrl = window.location.protocol + '//' + window.location.host;
+                const response = await fetch(baseUrl + '/api/create-checkout-session', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ plan: planType })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success && result.checkout_url) {
+                    // Redirect to Stripe hosted checkout
+                    window.location.href = result.checkout_url;
+                } else {
+                    alert('Error: ' + (result.error || 'Failed to create checkout session'));
+                }
+            } catch (error) {
+                alert('Payment failed: ' + error.message);
+            }
+        }
+    </script>
+</body>
+</html>
