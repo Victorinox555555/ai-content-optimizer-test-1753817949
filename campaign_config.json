@@ -1,0 +1,27 @@
+{
+    "app_name": "Test-marketing_booster",
+    "description": "A test micro-SaaS application for testing skills",
+    "target_audience": "developers and entrepreneurs",
+    "campaigns": [
+        {
+            "name": "Launch Campaign",
+            "type": "social_media",
+            "platforms": ["twitter", "linkedin", "facebook"],
+            "duration_days": 30,
+            "budget": 1000,
+            "objectives": ["brand_awareness", "user_acquisition"]
+        },
+        {
+            "name": "Email Onboarding",
+            "type": "email",
+            "sequence": ["welcome", "feature_intro", "trial_reminder"],
+            "trigger": "user_signup",
+            "duration_days": 14
+        }
+    ],
+    "tracking": {
+        "utm_source": "marketing_automation",
+        "utm_medium": "saas_factory",
+        "utm_campaign": "launch"
+    }
+}
