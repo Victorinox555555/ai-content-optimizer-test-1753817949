@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Test-stripe_charge</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center">
+    <div class="max-w-md w-full space-y-8">
+        <div>
+            <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+                Complete Your Purchase
+            </h2>
+        </div>
+        
+        <form id="payment-form" class="mt-8 space-y-6">
+            <div id="payment-element">
+                <!-- Stripe Elements will create form elements here -->
+            </div>
+            
+            <div id="error-message" class="text-red-600 text-sm hidden"></div>
+            
+            <button id="submit-button" type="submit" 
+                    class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                <span id="button-text">Pay Now</span>
+                <div id="spinner" class="hidden ml-2">
+                    <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                </div>
+            </button>
+        </form>
+    </div>
+    
+    <script>
+        const stripe = Stripe('pk_test_...');
+        
+        const urlParams = new URLSearchParams(window.location.search);
+        const clientSecret = urlParams.get('client_secret');
+        
+        if (clientSecret) {
+            const elements = stripe.elements({clientSecret});
+            const paymentElement = elements.create('payment');
+            paymentElement.mount('#payment-element');
+            
+            const form = document.getElementById('payment-form');
+            form.addEventListener('submit', async (event) => {
+                event.preventDefault();
+                
+                const submitButton = document.getElementById('submit-button');
+                const buttonText = document.getElementById('button-text');
+                const spinner = document.getElementById('spinner');
+                
+                submitButton.disabled = true;
+                buttonText.textContent = 'Processing...';
+                spinner.classList.remove('hidden');
+                
+                const {error} = await stripe.confirmPayment({
+                    elements,
+                    confirmParams: {
+                        return_url: window.location.origin + '/payment-success'
+                    }
+                });
+                
+                if (error) {
+                    document.getElementById('error-message').textContent = error.message;
+                    document.getElementById('error-message').classList.remove('hidden');
+                    
+                    submitButton.disabled = false;
+                    buttonText.textContent = 'Pay Now';
+                    spinner.classList.add('hidden');
+                }
+            });
+        } else {
+            document.getElementById('payment-form').innerHTML = '<p class="text-red-600">Invalid payment session. Please try again.</p>';
+        }
+    </script>
+</body>
+</html>
