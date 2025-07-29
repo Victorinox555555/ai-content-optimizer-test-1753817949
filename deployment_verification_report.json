@@ -1,0 +1,76 @@
+{
+  "url": "https://user:e95aba8a7d03b99f5e495911f02a30e9@chat-privacy-checker-tunnel-o8b3yydz.devinapps.com",
+  "timestamp": 1753815395.8885827,
+  "total_tests": 8,
+  "passed_tests": 7,
+  "success_rate": 0.875,
+  "overall_status": "PARTIAL",
+  "detailed_results": [
+    {
+      "test": "SSL Certificate",
+      "success": true,
+      "details": "Valid SSL certificate",
+      "timestamp": 1753815394.7675598
+    },
+    {
+      "test": "Security Headers",
+      "success": true,
+      "details": "All security headers present",
+      "timestamp": 1753815394.798507
+    },
+    {
+      "test": "Performance",
+      "success": true,
+      "details": "Page loaded in 0.03s",
+      "timestamp": 1753815394.8296664
+    },
+    {
+      "test": "API /api/health",
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": 1753815394.8603709
+    },
+    {
+      "test": "API /api/signup",
+      "success": true,
+      "details": "Status: 400",
+      "timestamp": 1753815394.8903365
+    },
+    {
+      "test": "API /api/login",
+      "success": true,
+      "details": "Status: 400",
+      "timestamp": 1753815394.920611
+    },
+    {
+      "test": "API /api/create-checkout-session",
+      "success": false,
+      "details": "Unexpected status: 200",
+      "timestamp": 1753815395.379472
+    },
+    {
+      "test": "Database Connectivity",
+      "success": true,
+      "details": "Database connected",
+      "timestamp": 1753815395.4103665
+    },
+    {
+      "test": "User Registration",
+      "success": true,
+      "details": "User created with ID: 10",
+      "timestamp": 1753815395.470309
+    },
+    {
+      "test": "Payment Integration",
+      "success": true,
+      "details": "Stripe checkout session created",
+      "timestamp": 1753815395.8580377
+    },
+    {
+      "test": "Responsive Design",
+      "success": true,
+      "details": "Viewport meta tag present",
+      "timestamp": 1753815395.8885026
+    }
+  ]
+}
